@@ -14,7 +14,7 @@ var piano;
 var octaves = 4;
 var sound = 'Piano';
 
-function createPiano() {
+function createPiano(octaves) {
     let noteWidth = Math.round((window.innerWidth - 2 * PIANO_OFFSET_X) / (7 * octaves));
     let noteHeight = noteWidth * 4;
     console.log(noteWidth);
@@ -28,8 +28,15 @@ function displayPiano() {
     piano.display();
 }
 
+function octavesChanged() {
+    octaves = document.getElementById("octaves").value;
+    CTX.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    createPiano(octaves);
+    displayPiano();
+}
+
 function main() {
-    createPiano();
+    createPiano(octaves);
     piano.showNotes();
     displayPiano();
 
