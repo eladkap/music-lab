@@ -12,18 +12,21 @@ class Note {
 
     display() {
         CTX.beginPath();
-        CTX.strokeStyle = "rgb(0, 0, 0)";
+        CTX.strokeStyle = 'black';
         if (this.isNatural) {
-            CTX.fillStyle = "rgb(255, 255, 255)";
+            CTX.fillStyle = NATURAL_NOTE_COLOR;
         }
         else {
-            CTX.fillStyle = "rgb(0, 0, 0)";
+            CTX.fillStyle = SHARP_NOTE_COLOR;
         }
-        CTX.fillRect(this.x, this.y, this.width, this.height);
+        CTX.roundRect(this.x, this.y, this.width, this.height, 5);
+        CTX.lineWidth = 1;
         CTX.stroke();
+        CTX.fill();
         
-        CTX.font = "14px Arial";
-        CTX.strokeText(this.symbol, this.x + this.width / 5, this.y);
+        // CTX.font = '8px Arial';
+        // CTX.strokeText(this.symbol, this.x + this.width / 5, this.y - 5);
+        // CTX.closePath();
     }
 
     highlight() {

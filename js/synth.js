@@ -1,8 +1,12 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 class Synth {
-    static ctx = new AudioContext();
+    static ctx = null;
     static oscillators = {};
+
+    static setAudioContext() {
+        Synth.ctx = new AudioContext();
+    }
 
     static midiToFrequency(midiNumber) {
         const A = 440;
