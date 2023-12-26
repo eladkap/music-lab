@@ -1,10 +1,10 @@
 /* GLOBALS */
-const startButton = document.getElementById("start_btn");
+const startButton = document.getElementById("start-btn");
 startButton.addEventListener('click', () => {
     Synth.setAudioContext();
 });
 
-var canvas = document.getElementById("music_canvas");
+var canvas = document.getElementById("music-canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var CTX = canvas.getContext("2d");
