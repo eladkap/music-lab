@@ -16,12 +16,10 @@ var sound = 'Piano';
 
 function createPiano(octaves) {
     let noteWidth = Math.round((window.innerWidth - 2 * PIANO_OFFSET_X) / (7 * octaves));
-    let noteHeight = noteWidth * 4;
-    console.log(noteWidth);
-    console.log(noteHeight);
+    let noteHeight = noteWidth * 5;
     let pianoPosX = PIANO_OFFSET_X;
     let pianoPosY = window.innerHeight - noteHeight - PIANO_OFFSET_Y;
-    piano = new Piano(pianoPosX, pianoPosY, octaves, noteWidth, noteHeight);
+    piano = new Piano(pianoPosX, pianoPosY, Number(octaves), noteWidth, noteHeight);
 }
 
 function displayPiano() {
@@ -43,6 +41,8 @@ function main() {
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(Synth.success, Synth.fail);
     }
+
+    console.log(Utils.getAllNaturalNotes('F2', 'A7'));
 }
 
 main();
