@@ -9,14 +9,23 @@
 <body>
     <button id="start-btn">Start</button>
 
-    <label for="octaves">Octaves:</label>
-    <select name="octaves" id="octaves" value="4" onchange="octavesChanged()">
-        <option value="2">2</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-    </select>
+    <div class="controller-div">
+        <label for="sound">Sound</label>
+        <select name="sound" id="sound-selector" value="piano" onchange="soundChanged()">
+            <option value="piano">Piano</option>
+            <option value="organ">Organ</option>
+            <option value="guitar">Guitar</option>
+            <option value="string">String</option>
+        </select>
+
+        <label for="keys" style="margin-left: 20px">Keys</label>
+        <select name="keys" id="keys-selector" value="61" onchange="keysChanged()">
+            <option value="49">49</option>
+            <option value="61">61</option>
+            <option value="88">88</option>
+        </select>
+    </div>
+    
     
     <canvas id="music-canvas">
     </canvas>
@@ -27,6 +36,7 @@
     <script src="./js/synth.js"></script>
     <script src="./js/note.js"></script>
     <script src="./js/piano.js"></script>
+    <script src="./js/controller.js"></script>
     <script src="./js/app.js"></script>
 </body>
 </html>

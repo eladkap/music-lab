@@ -1,6 +1,8 @@
 class Utils {
-    static getAllNaturalNotes(firstNote, lastNote){
-        let notes = [];
+    static getAllNaturalNotes(range){
+        let firstNote = range[0];
+        let lastNote = range[1];
+        let naturalNotes = [];
 
         let firstOctaveNumber = Number(firstNote[1]);
         let lastOctaveNumber = Number(lastNote[1]);
@@ -11,23 +13,21 @@ class Utils {
 
         for (let octaveNumber = firstOctaveNumber; octaveNumber <= lastOctaveNumber; octaveNumber++) {
             if (octaveNumber == firstOctaveNumber) {
-                let firstOctave = NATURAL_SYMBOLS.slice(firstNoteIndex).map((noteSymbol => {
-                    return noteSymbol + octaveNumber
+                NATURAL_SYMBOLS.slice(firstNoteIndex).forEach((noteSymbol => {
+                    naturalNotes.push(noteSymbol + octaveNumber);
                 }));
-                notes.push(firstOctave);
             }
             else if (octaveNumber == lastOctaveNumber) {
-                let lastOctave = NATURAL_SYMBOLS.slice(0, lastNoteIndex + 1).map((noteSymbol => {
-                    return noteSymbol + octaveNumber
+                NATURAL_SYMBOLS.slice(0, lastNoteIndex + 1).forEach((noteSymbol => {
+                    naturalNotes.push(noteSymbol + octaveNumber);
                 }));
-                notes.push(lastOctave);
             }
             else {
-                notes.push(NATURAL_SYMBOLS.map((noteSymbol) => {
-                    return noteSymbol + octaveNumber;
-                }));
+                NATURAL_SYMBOLS.forEach((noteSymbol) => {
+                    naturalNotes.push(noteSymbol + octaveNumber);
+                })
             }
         }
-        return notes.flat();
+        return naturalNotes.flat();
     }
 }

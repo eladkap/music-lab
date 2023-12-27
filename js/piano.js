@@ -1,8 +1,9 @@
 class Piano {
-    constructor(x, y, octaves, noteWidth, noteHeight) {
+    constructor(x, y, range, noteWidth, noteHeight) {
         this.x = x;
         this.y = y;
-        this.octaves = octaves;
+        this.range = range;
+        this.octaves = 5;
         this.noteWidth = noteWidth;
         this.noteHeight = noteHeight;
         this.notes = this.setNotes();
