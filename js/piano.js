@@ -1,12 +1,32 @@
 class Piano {
-    constructor(x, y, range, noteWidth, noteHeight) {
-        this.x = x;
-        this.y = y;
+    constructor(range) {
+        this.x = 0;
+        this.y = 0;
         this.range = range;
-        this.octaves = 5;
-        this.noteWidth = noteWidth;
-        this.noteHeight = noteHeight;
-        this.notes = this.setNotes();
+        this.notes = this.setup(range);
+    }
+
+    setup(range) {
+        let notes = [];
+        let naturalNotes = Utils.getAllNaturalNotes(range);
+
+        let noteWidth = Math.round((window.innerWidth - 2 * PIANO_OFFSET_X) / naturalNotes.length);
+        let noteHeight = noteWidth * 5;
+
+        this.x = PIANO_OFFSET_X;
+        this.y = window.innerHeight - noteHeight - PIANO_OFFSET_Y;
+
+        for (let i = 0; i < naturalNotes.length; i++) {
+            let symbol = naturalNotes[i];
+            let midiNumber = i;
+            let x = this.x + i * noteWidth;
+            let y = this.y;
+            let w = noteWidth;
+            let h = noteHeight;
+            let note = new Note(x, y, w, h, symbol, midiNumber, true);
+            notes.push(note);
+        }
+        return notes;
     }
 
     setNotes() {

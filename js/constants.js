@@ -9,6 +9,15 @@ const SHARP_SYMBOLS = ['C#', 'D#', 'F#', 'G#', 'A#'];
 const NATURAL_NOTE_COLOR = 'rgb(250, 250, 250)';
 const SHARP_NOTE_COLOR = 'rgb(50, 50, 50)';
 
+SOUND_OPTIONS = [
+    'Piano',
+    'Organ',
+    'Guitar',
+    'String'
+]
+
+KEYS_OPTIONS = ['49','61','88'];
+
 const NOTE_RANGES = {
     '49': ['C1', 'C5'],
     '61': ['C1', 'C6'],

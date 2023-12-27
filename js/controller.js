@@ -2,7 +2,7 @@ class Controller {
     constructor(sound, keysNumber) {
         this.sound = sound;
         this.keysNumber = keysNumber;
-        this.piano = this.createPiano(keysNumber);
+        this.setPiano(keysNumber);
         this.octave = 1;
         this.gain = 50;
         this.tempo = 100;
@@ -10,14 +10,8 @@ class Controller {
         this.playedChord = '';
     }
 
-    createPiano(keysNumber) {
-        let octaves = 5;
-        let noteWidth = Math.round((window.innerWidth - 2 * PIANO_OFFSET_X) / (7 * octaves));
-        let noteHeight = noteWidth * 5;
-        let pianoPosX = PIANO_OFFSET_X;
-        let pianoPosY = window.innerHeight - noteHeight - PIANO_OFFSET_Y;
-        let piano = new Piano(pianoPosX, pianoPosY, NOTE_RANGES[keysNumber], noteWidth, noteHeight);
-        return piano;
+    setPiano(keysNumber) {
+        this.piano = new Piano(NOTE_RANGES[keysNumber]);
     }
 
     display() {

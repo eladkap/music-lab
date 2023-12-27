@@ -14,11 +14,7 @@ var controller;
 
 
 function createController() {
-    controller = new Controller();
-}
-
-function displayController() {
-    controller.display();
+    controller = new Controller(SOUND_OPTIONS, KEYS_OPTIONS[0]);
 }
 
 function soundChanged() {
@@ -33,16 +29,15 @@ function keysChanged() {
     let range = NOTE_RANGES[keysNumber];
     console.log(Utils.getAllNaturalNotes(range));
 
-    // CTX.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    // let range = ['C1', 'A7'];
-    // createPiano(range);
-    // createPiano(octaves);
-    // displayPiano();
+    CTX.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    controller.setPiano(keysNumber);
+    controller.display();
+    console.log(controller.piano);
 }
 
 function main() {
     createController();
-    displayController();
+    controller.display();
 
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(Synth.success, Synth.fail);
