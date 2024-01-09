@@ -1,2 +1,6 @@
+Piano roll fix:
+- Create notes by octaves
+- slice left and right sides by range
+
 Add to synth controllers:
 - Gain - controll volume
