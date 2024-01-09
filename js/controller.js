@@ -11,6 +11,7 @@ class Controller {
     }
 
     setPiano(keysNumber) {
+        console.log(`Range: ${NOTE_RANGES[keysNumber]}`);
         this.piano = new Piano(NOTE_RANGES[keysNumber]);
     }
 

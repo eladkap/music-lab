@@ -20,9 +20,15 @@ class Note {
         CTX.lineWidth = 1;
         CTX.stroke();
         CTX.fill();
-        
-        // CTX.font = '8px Arial';
-        // CTX.strokeText(this.symbol, this.x + this.width / 5, this.y - 5);
+
+        // if (this.isNatural) {
+        //     CTX.strokeStyle = 'black';
+        // }
+        // else {
+        //     CTX.strokeStyle = 'white';
+        // }
+        // CTX.font = '10px Arial';
+        // CTX.strokeText(this.symbol, this.x + this.width / 5, this.y + this.height - 5);
         // CTX.closePath();
     }
 
