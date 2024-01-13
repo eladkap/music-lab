@@ -1,11 +1,12 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 class Synth {
-    static ctx = null;
+    static ctx = new AudioContext();
     static oscillators = {};
+    static notes = {};
 
     static setAudioContext() {
-        Synth.ctx = new AudioContext();
+        this.ctx = new AudioContext();
     }
 
     static midiToFrequency(midiNumber) {
@@ -18,6 +19,7 @@ class Synth {
     }
     
     static success(midiAccess) {
+        console.log('success');
         midiAccess.addEventListener('statechange', Synth.updateDevices);
     
         const inputs = midiAccess.inputs;
@@ -37,6 +39,7 @@ class Synth {
                 // sound is on
                 if (velocity > 0) {
                     Synth.soundOn(sound);
+                    console.log(event);
                 }
                 // sound is off
                 else {
@@ -51,12 +54,12 @@ class Synth {
     }
 
     static soundOn(sound) {
-        const osc = Synth.ctx.createOscillator();
-        const oscGain = Synth.ctx.createGain();
+        const osc = this.ctx.createOscillator();
+        const oscGain = this.ctx.createGain();
         oscGain.gain.value = 0.33;
 
         const velocityGainAmount = sound.velocity / 127;
-        const velocityGain = Synth.ctx.createGain();
+        const velocityGain = this.ctx.createGain();
         velocityGain.gain.value = velocityGainAmount;
 
         osc.type = 'sine';
@@ -64,26 +67,26 @@ class Synth {
 
         osc.connect(oscGain);
         oscGain.connect(velocityGain);
-        velocityGain.connect(Synth.ctx.destination);
+        velocityGain.connect(this.ctx.destination);
 
         osc.gain = oscGain;
-        Synth.oscillators[sound.midiNumber] = osc;
+        this.oscillators[sound.midiNumber] = osc;
 
         osc.start();
     }
     
     static soundOff(sound) {
-        const osc = Synth.oscillators[sound.midiNumber];
+        const osc = this.oscillators[sound.midiNumber];
         const oscGain = osc.gain;
-        oscGain.gain.setValueAtTime(oscGain.gain.value, Synth.ctx.currentTime);
-        oscGain.gain.exponentialRampToValueAtTime(0.0001, Synth.ctx.currentTime + 0.03);
+        oscGain.gain.setValueAtTime(oscGain.gain.value, this.ctx.currentTime);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.03);
 
         setTimeout(() => {
             osc.stop();
             osc.disconnect();
         }, 20);
         
-        delete Synth.oscillators[sound.midiNumber];
+        delete this.oscillators[sound.midiNumber];
     }
 
     static updateDevices(event) {
@@ -96,6 +99,10 @@ class Synth {
         console.log(midiController);
     }
 
+    static onKeyDown(key) {
+        let symbol = KEYBOARD_MAP[key];
+        console.log(symbol);
+    }
 }
 
 

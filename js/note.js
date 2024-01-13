@@ -10,6 +10,7 @@ class Note {
         this.velocity = 0;
         this.isPlayed = false;
         this.color = isNatural ? NATURAL_NOTE_COLOR : SHARP_NOTE_COLOR;
+        this.showSymbol = true;
     }
 
     display() {
@@ -21,15 +22,16 @@ class Note {
         CTX.stroke();
         CTX.fill();
 
-        // if (this.isNatural) {
-        //     CTX.strokeStyle = 'black';
-        // }
-        // else {
-        //     CTX.strokeStyle = 'white';
-        // }
-        // CTX.font = '10px Arial';
-        // CTX.strokeText(this.symbol, this.x + this.width / 5, this.y + this.height - 5);
-        // CTX.closePath();
+        if (this.showSymbol) {
+            if (this.isNatural) {
+                CTX.strokeStyle = 'black';
+                CTX.font = '18px courier';
+                CTX.strokeText(this.symbol[0], this.x + this.width / 3, this.y + this.height - 5);
+            }
+            
+            CTX.closePath();
+        }
+        
     }
 
     containsPoint(x, y)  {
@@ -44,5 +46,9 @@ class Note {
         else {
             this.color = this.isNatural ? NATURAL_NOTE_COLOR : SHARP_NOTE_COLOR;
         }
+    }
+
+    setShowSymbol(b) {
+        this.showSymbol = b;
     }
 }

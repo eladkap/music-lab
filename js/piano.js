@@ -18,7 +18,7 @@ class Piano {
         let notes = [];
         for (let octave = 0; octave < MAX_OCTAVES; octave++) {
             for (let symbol of ALL_SYMBOLS) {
-                let isNatural = !symbol.includes('#');
+                let isNatural = !symbol.includes(SHARP_SYMBOL);
                 let noteSymbol =  `${symbol}${octave}`;
                 let midiNumber = this.calcMidiNumber(symbol, octave);
                 let note = new Note(0, 0, 0, 0, noteSymbol, midiNumber, isNatural);
@@ -106,6 +106,15 @@ class Piano {
         return -1;
     }
 
+    getNoteBySymbol(symbol) {
+        for (let note of this.notes) {
+            if (note.symbol == symbol) {
+                return note;
+            }
+        }
+        return null;
+    }
+
     setNotesByRange(range) {
         let filteredNotes = [];
         let firstSymbol = range[0];
@@ -139,5 +148,12 @@ class Piano {
     showNotes() {
         console.log(this.notes);
         console.log(this.notesMap);
+    }
+
+    highlightNotes(highNotes) {
+        for (let noteSymbol of highNotes) {
+            let note = this.getNoteBySymbol(noteSymbol);
+            note.setHighlight(true);
+        }
     }
 }

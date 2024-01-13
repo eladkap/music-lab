@@ -6,8 +6,8 @@ class Controller {
         this.octave = 1;
         this.gain = 50;
         this.tempo = 100;
-        this.playedNotes = [];
-        this.playedChord = '';
+        // this.playedNotes = [];
+        // this.playedChord = '';
     }
 
     setPiano(keysNumber) {

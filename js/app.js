@@ -1,8 +1,5 @@
 /* GLOBALS */
 const startButton = document.getElementById("start-btn");
-startButton.addEventListener('click', () => {
-    Synth.setAudioContext();
-});
 
 var canvas = document.getElementById("music-canvas");
 canvas.width = window.innerWidth;
@@ -13,13 +10,20 @@ var CTX = canvas.getContext("2d");
 //     onMouseover(event);
 // });
 
+window.addEventListener("keydown", (event) => {
+    Synth.onKeyDown(event.key);
+});
+
 /* VARIALBES */
-var controller;
+var controller = new Controller(SOUND_OPTIONS, KEYS_OPTIONS[0]);
 
+startButton.addEventListener('click', () => {
+    // Synth.setAudioContext();
+    Synth.ctx.resume().then(() => {
 
-function createController() {
-    controller = new Controller(SOUND_OPTIONS, KEYS_OPTIONS[0]);
-}
+    });
+});
+
 
 function soundChanged() {
     let soundController = document.getElementById("sound-selector");
@@ -52,15 +56,15 @@ function onMouseover(event) {
 }
 
 function main() {
-    createController();
     controller.display();
     controller.piano.showNotes();
 
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess().then(Synth.success, Synth.fail);
-    } 
+    }
 
-    
+    // controller.piano.highlightNotes(['C3', 'E3', 'G3']);
+    // controller.display();
 }
 
 main();
